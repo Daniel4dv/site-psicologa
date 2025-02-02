@@ -95,7 +95,7 @@ nav a:hover::after {
     width: 100%;
 }
 
-main {
+.main-content {
     padding-top: 100px;
     margin: 0 var(--page-margin);
 }
@@ -266,6 +266,41 @@ footer {
     }
 }
 
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    position: fixed;
+    top: 20px;
+    right: var(--page-margin);
+    z-index: 1100;
+}
+
+.menu-toggle span {
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
 @media screen and (max-width: 768px) {
     :root {
         --page-margin: 3%;  /* Slightly reduce margin on smaller screens */
@@ -273,18 +308,34 @@ footer {
 
     header {
         flex-direction: column;
-        padding: 1rem var(--page-margin);
+        align-items: center;
+        max-height: 80px;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
     }
 
-    .logo {
-        text-align: center;
-        margin-bottom: 15px;
+    header.menu-open {
+        max-height: 500px; /* Adjust as needed */
+    }
+
+    nav {
+        width: 100%;
+        display: none;
+    }
+
+    header.menu-open nav {
+        display: block;
     }
 
     nav ul {
         flex-direction: column;
         align-items: center;
-        gap: 15px;
+        width: 100%;
+        padding: 20px 0;
+    }
+
+    .menu-toggle {
+        display: flex;
     }
 
     main {

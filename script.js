@@ -42,4 +42,33 @@ document.addEventListener('DOMContentLoaded', () => {
             header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.05)';
         }
     });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const header = document.querySelector('header');
+    const nav = document.querySelector('nav');
+
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        header.classList.toggle('menu-open');
+        
+        // Improve accessibility
+        if (header.classList.contains('menu-open')) {
+            nav.setAttribute('aria-hidden', 'false');
+            menuToggle.setAttribute('aria-expanded', 'true');
+        } else {
+            nav.setAttribute('aria-hidden', 'true');
+            menuToggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    // Close menu when a nav link is clicked
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            header.classList.remove('menu-open');
+            nav.setAttribute('aria-hidden', 'true');
+            menuToggle.setAttribute('aria-expanded', 'false');
+        });
+    });
 });
